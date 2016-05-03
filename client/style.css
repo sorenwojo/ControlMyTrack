@@ -1,0 +1,22 @@
+.movingArm {
+    stroke:red;
+}
+
+.staticArm {
+    stroke:rgb(60,60,60);
+}
+
+.rail {
+    stroke-width:10;
+}
+
+.straightRail {
+    stroke:black;
+}
+
+.interactionArea {
+    fill:black;
+    opacity: 0.1;
+    z-index: 1000;
+    cursor:pointer;
+}
