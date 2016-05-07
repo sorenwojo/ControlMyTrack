@@ -15,7 +15,7 @@ function Turnout(name) {
     this._maxPosition = 15;
     this._actualPosition = this._minPosition;
     this._updateServo();
-}
+};
 
 Turnout.prototype.intervalPassed = function() {
     switch(this._position){
@@ -34,11 +34,11 @@ Turnout.prototype.intervalPassed = function() {
             this._updateServo();
             break;
     }
-}
+};
 
 Turnout.prototype.getActualPosition = function () {
     return {name: this._name, position: this._position};
-}
+};
 
 Turnout.prototype.toggleSwitch = function () {
     switch(this._position) {
@@ -51,8 +51,12 @@ Turnout.prototype.toggleSwitch = function () {
             this._position = TURNOUT_POSITION_MOVING_TO_DIVERGE;
             break;
     }    
-}
+};
+
+Turnout.prototype.getStatus = function() {
+    return this._name + ":" + this._position + "\n";    
+};
 
 Turnout.prototype._updateServo = function () {
     console.info("Name:%s Position:%d", this._name, this._actualPosition);
-}
+};

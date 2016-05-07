@@ -19,5 +19,9 @@ function timerTrig() {
 }
 
 module.exports.getStatus = function() {
-    return "OY!";
+    var status = "";
+    turnouts.forEach(function(turnout){
+        status += turnout.getStatus();
+    });
+    return status;
 };
