@@ -54,7 +54,7 @@ Turnout.prototype.toggleSwitch = function () {
 };
 
 Turnout.prototype.getStatus = function() {
-    return this._name + ":" + this._position + "\n";    
+    return { name: this._name, position: this._position };    
 };
 
 Turnout.prototype._updateServo = function () {

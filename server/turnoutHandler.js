@@ -19,9 +19,7 @@ function timerTrig() {
 }
 
 module.exports.getStatus = function() {
-    var status = "";
-    turnouts.forEach(function(turnout){
-        status += turnout.getStatus();
+    return turnouts.map(function(turnout){
+        return turnout.getStatus();
     });
-    return status;
 };
