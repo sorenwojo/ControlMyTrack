@@ -1,16 +1,19 @@
 {
   "turnouts": [
     {
+      "id": 0,
       "name": "Fisk",
       "minPosition": 10,
       "maxPosition": 15
     },
     {
+      "id": 1,
       "name": "Fisk1",
       "minPosition": 21,
       "maxPosition": 25
     },
     {
+      "id": 2,
       "name": "Fisk2",
       "minPosition": 30,
       "maxPosition": 35
