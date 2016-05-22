@@ -4,9 +4,15 @@ var appRouter = function(app, turnoutHandler) {
         res.send("Hello World");
     });
     
-    app.get("/turnouts/status", function(req, res) {
+    app.get("/turnouts", function(req, res) {
         var status = _turnoutHandler.getStatus();
         res.send(status);
+    }) 
+
+    app.post("/turnouts/:id", function(req, res) {
+        console.log("Recieved request to toggle %d.", req.params.id);
+        _turnoutHandler.toggle(req.params.id);
+        res.end();
     }) 
 }
  
