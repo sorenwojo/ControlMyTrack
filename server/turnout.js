@@ -4,16 +4,17 @@ const TURNOUT_STATE_STRAIGHT = 0;
 const TURNOUT_STATE_DIVERGE = 1;
 const TURNOUT_STATE_MOVING_TO_STRAIGHT = 10;
 const TURNOUT_STATE_MOVING_TO_DIVERGE = 11;
+const TURNOUT_STATE_MANUAL_CONTROL = 99;
 
 module.exports = Turnout;
 
-function Turnout(id, name) {
+function Turnout(id, name, minPosition, maxPosition) {
     this.id = id;
     this._name = name;
     this._state = TURNOUT_STATE_STRAIGHT;
 
-    this._minPosition = 10;
-    this._maxPosition = 15;
+    this._minPosition = minPosition;
+    this._maxPosition = maxPosition;
     this._position = this._minPosition;
     this._updateServo();
 };
@@ -55,8 +56,38 @@ Turnout.prototype.togglePosition = function () {
     }
 };
 
+Turnout.prototype.setPosition = function(position) {
+    this._state = TURNOUT_STATE_MANUAL_CONTROL;
+    this._position = position;
+    this._updateServo();
+}
+
+Turnout.prototype.setCurrentPositionAsMin = function() {
+    this._state = TURNOUT_STATE_STRAIGHT;
+    this._minPosition = this._position;
+}
+
+Turnout.prototype.setCurrentPositionAsMax = function() {
+    this._state = TURNOUT_STATE_DIVERGE;
+    this._maxPosition = this._position;
+}
+
+Turnout.prototype.cancelManual = function() {
+    if(Math.abs(this._position - this._minPosition) < Math.abs(this._position - this._maxPosition))
+    {
+        this._state = TURNOUT_STATE_STRAIGHT;
+        this._position = this._minPosition;
+    }
+    else
+    {
+        this._state = TURNOUT_STATE_DIVERGE;
+        this._position = this._maxPosition;
+    }
+    this._updateServo();
+}
+
 Turnout.prototype.getStatus = function () {
-    return { name: this._name, position: this._position };
+    return { name: this._name, position: this._position, state: this._state };
 };
 
 Turnout.prototype._updateServo = function () {
