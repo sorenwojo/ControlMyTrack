@@ -8,7 +8,8 @@ const TURNOUT_STATE_MANUAL_CONTROL = 99;
 
 module.exports = Turnout;
 
-function Turnout(id, name, minPosition, maxPosition) {
+function Turnout(settings, id, name, minPosition, maxPosition) {
+    this._settings = settings;
     this.id = id;
     this._name = name;
     this._state = TURNOUT_STATE_STRAIGHT;
@@ -65,11 +66,13 @@ Turnout.prototype.setPosition = function(position) {
 Turnout.prototype.setCurrentPositionAsMin = function() {
     this._state = TURNOUT_STATE_STRAIGHT;
     this._minPosition = this._position;
+    this._settings.updateSettingsForTurnout(this._name, this._minPosition, this._maxPosition);
 }
 
 Turnout.prototype.setCurrentPositionAsMax = function() {
     this._state = TURNOUT_STATE_DIVERGE;
     this._maxPosition = this._position;
+    this._settings.updateSettingsForTurnout(this._name, this._minPosition, this._maxPosition);
 }
 
 Turnout.prototype.cancelManual = function() {

@@ -4,7 +4,7 @@ var turnouts;
 module.exports.initialize = function (settings) {
     var settingsForTurnouts = settings.getSettingsForAllTurnouts();
     turnouts = settingsForTurnouts.map(function (item) {
-        return new Turnout(item.id, item.name, item.minPosition, item.maxPosition);
+        return new Turnout(settings, item.id, item.name, item.minPosition, item.maxPosition);
     });
 
     console.log("Found and initialized %d turnouts", turnouts.length);
