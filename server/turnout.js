@@ -23,14 +23,14 @@ Turnout.prototype.intervalPassed = function () {
         case TURNOUT_STATE_MOVING_TO_DIVERGE:
             this._position++;
             if (this._position === this._maxPosition) {
-                this._position = TURNOUT_STATE_DIVERGE;
+                this._state = TURNOUT_STATE_DIVERGE;
             }
             this._updateServo();
             break;
         case TURNOUT_STATE_MOVING_TO_STRAIGHT:
             this._position--;
             if (this._position === this._minPosition) {
-                this._position = TURNOUT_STATE_STRAIGHT;
+                this._state = TURNOUT_STATE_STRAIGHT;
             }
             this._updateServo();
             break;
@@ -46,17 +46,17 @@ Turnout.prototype.togglePosition = function () {
     switch (this._state) {
         case TURNOUT_STATE_DIVERGE:
         case TURNOUT_STATE_MOVING_TO_DIVERGE:
-            this._position = TURNOUT_STATE_MOVING_TO_STRAIGHT;
+            this._state = TURNOUT_STATE_MOVING_TO_STRAIGHT;
             break;
         case TURNOUT_STATE_STRAIGHT:
         case TURNOUT_STATE_MOVING_TO_STRAIGHT:
-            this._position = TURNOUT_STATE_MOVING_TO_DIVERGE;
+            this._state = TURNOUT_STATE_MOVING_TO_DIVERGE;
             break;
     }
 };
 
 Turnout.prototype.getStatus = function () {
-    return { name: this._name, position: this._state };
+    return { name: this._name, position: this._position };
 };
 
 Turnout.prototype._updateServo = function () {
