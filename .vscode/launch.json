@@ -7,6 +7,16 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Run Gulp",
+            "program": "${workspaceRoot}/client/node_modules/gulp/bin/gulp.js",
+            "args": [
+                "publish-js"
+            ],
+            "cwd": "${workspaceRoot}/client"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceRoot}/server/app.js",
             "cwd": "${workspaceRoot}/server"
