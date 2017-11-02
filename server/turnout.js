@@ -90,7 +90,24 @@ Turnout.prototype.cancelManual = function() {
 }
 
 Turnout.prototype.getStatus = function () {
-    return { name: this._name, position: this._position, state: this._state };
+    var stateString;
+
+    switch (this._state) {
+        case TURNOUT_STATE_MANUAL_CONTROL:
+            stateString = "manual";
+            break;
+        case TURNOUT_STATE_DIVERGE:
+            stateString = "diverge";
+            break;
+        case TURNOUT_STATE_STRAIGHT:
+            stateString = "straight";
+            break;
+        default:
+            stateString = "moving";
+            break;
+    }
+
+    return { id: this.id, name: this._name, position: this._position, state: stateString };
 };
 
 Turnout.prototype._updateServo = function () {
