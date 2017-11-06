@@ -4,6 +4,8 @@ var routes = require("./routes");
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
 var server;
  
 function startListening(turnoutHandler) {

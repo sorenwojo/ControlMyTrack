@@ -6,7 +6,7 @@ var plugins = require("gulp-load-plugins")({
 	replaceString: /\bgulp[\-.]/
 });
 
-var dest = 'public/';
+var dest = '../server/public/';
 
 gulp.task('publish-js', function() {
 	var jsFiles = ['src/script/*'];
